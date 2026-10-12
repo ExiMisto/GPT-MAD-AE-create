@@ -16,40 +16,8 @@
 - [匿名失败记录与证据](docs/06-evidence-and-failures.md)：成功、失败、推测与未验证项目分别记录。
 - [skill 公开快照](skills/ae-static-mad/SKILL.md)：保留跨作品方法，移除了项目专属路由。
 
-## 最小工具链
+工程文件v71包含素材、qep文档等内容。
 
-Python 3.10+，工具均使用标准库，不要求安装图片或机器学习依赖。AE 相关 JSX 需要合法安装的 Adobe After Effects；本地原项目使用 AE 2025，但本包改写后的通用 JSX **尚未在另一台 AE 上运行验证**。Python 部分可以完全独立测试。
-
-```powershell
-python tools/self_check.py
-python tools/release_audit.py --root .
-```
-
-`self_check.py` 用自己生成的临时文本文件测试归档、缺失文件、路径边界、字节级副本一致性、帧区间和 dry-run；不会打开 AE 或读取任何成片。
-
-先复制 `examples/local-config.example.json` 为 `local-config.json`，填写你自己的路径。该文件已被 `.gitignore` 排除；示例只用通用占位路径。命令中的输出报告也建议放在 `outputs/`，避免把本地路径提交给 Git。
-
-```powershell
-python scripts/ae_tool.py audit --config local-config.json --afterfx "YOUR_AFTERFX_EXECUTABLE"
-python scripts/archive_assets.py --report outputs/asset-audit.json --output outputs/archive
-python scripts/ae_tool.py relink --config local-config.json --afterfx "YOUR_AFTERFX_EXECUTABLE"
-python scripts/ae_tool.py queue --config local-config.json --afterfx "YOUR_AFTERFX_EXECUTABLE"
-python scripts/ae_tool.py render --config local-config.json --aerender "YOUR_AERENDER_EXECUTABLE"
-```
-
-执行顺序和配置字段见 [工程与资产说明](docs/05-ae-and-assets.md)。`archive_assets.py` 只复制素材，绝不删原件；重链接另存新工程。`render` 只执行排好的渲染队列，不在导出后解码或鉴赏视频。缺素材、序列帧、字体、第三方效果仍由明确报告处理，不能因保存成功而忽略。
-
-文字示例只需要自己填写的一句文字：
-
-```powershell
-python scripts/ae_tool.py type-demo --config local-config.json --afterfx "YOUR_AFTERFX_EXECUTABLE"
-python scripts/frame_plan.py --fps 30 --start 12 --end 42 --clip-start 30 --clip-end 70
-python scripts/cleanup_dry_run.py --root outputs --keep examples/keep-list.example.json --output outputs/cleanup-plan.json
-```
-
-最后一条只生成候选清单，**没有删除模式**。文字示例演示组级揭示、读清与实心块吞没，是机制练习，不是最终 MAD 风格模板。
-
-## 当前能力与限制
 
 | 项目 | 这里能提供什么 | 不能据此宣称什么 |
 |---|---|---|

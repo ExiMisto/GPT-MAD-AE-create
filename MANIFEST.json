@@ -1,0 +1,197 @@
+[
+  {
+    "path": ".gitignore",
+    "bytes": 158,
+    "sha256": "e6f71e7db701f9f6d1f8e602a1f55cac822b112dca7452d85c335a4f30d35d37"
+  },
+  {
+    "path": "assets/README.md",
+    "bytes": 909,
+    "sha256": "9653601cf763c4dd38ac825a25410fe49ff9d274b181c89bcd6316fcc3a5f1aa"
+  },
+  {
+    "path": "docs/01-art-direction.md",
+    "bytes": 2059,
+    "sha256": "0f0d1333078bc3fde2570620ebda39d37e012d9ffc31234f8d5a6e315d5fc0e3"
+  },
+  {
+    "path": "docs/02-typography.md",
+    "bytes": 2130,
+    "sha256": "482c6578b3ff2090f2ff1beba3b0ff1b0b1b80694b6a1b415ef6e732f821722f"
+  },
+  {
+    "path": "docs/03-compositing.md",
+    "bytes": 2262,
+    "sha256": "9997fe6d9beb4f757b6d9ca28a139d5940af0a7061c2652e6a70697865264c6b"
+  },
+  {
+    "path": "docs/04-articulation.md",
+    "bytes": 1438,
+    "sha256": "1e53cb45e5afed259e2c1c413c8c5d49bc5615e0e92f288bf0026c6d6263f859"
+  },
+  {
+    "path": "docs/05-ae-and-assets.md",
+    "bytes": 4243,
+    "sha256": "c2c71e5f66a74a9d804f586055cea6128efca298b66e9c3cec9490ca18f0056a"
+  },
+  {
+    "path": "docs/06-evidence-and-failures.md",
+    "bytes": 2398,
+    "sha256": "1e394bf48706cbec8070223f590f917a583e61bfa69df34cd8e5da0a42ff8d6a"
+  },
+  {
+    "path": "docs/07-release-readiness.md",
+    "bytes": 1565,
+    "sha256": "d2e3296db52e8f80902fb8aa0d3ae8dbbeca339a637fa12460cb2dcc173140a1"
+  },
+  {
+    "path": "examples/keep-list.example.json",
+    "bytes": 87,
+    "sha256": "d7a91efaca959bd3a2c543e583fe93f1f8c1f57344b7229f6c6c44a17fb75d4e"
+  },
+  {
+    "path": "examples/local-config.example.json",
+    "bytes": 802,
+    "sha256": "e7dfa7be9ecff90a332e9d74a34e808aed10104c0e4ecaf1fc4b902658401cdf"
+  },
+  {
+    "path": "git_commands.ps1",
+    "bytes": 1163,
+    "sha256": "02e8dcbca3272f1a9fc6251e0fa1486e74ccdbdf0346aaa3b5ef98c753a3e6b9"
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 1066,
+    "sha256": "2f9f0a845b317dc529bd7ce23c5ac01343932e2c5249df98551a7851e05c5a62"
+  },
+  {
+    "path": "LICENSE.md",
+    "bytes": 833,
+    "sha256": "5c54d03b44824cea43239953b2ba6f0d2aa6d2a21de373fc8f88327e78df9627"
+  },
+  {
+    "path": "README.md",
+    "bytes": 5956,
+    "sha256": "ed7f824891f5be43700784c73d3aa0da5c9d9db79ca92c24dde975deb5d38bbc"
+  },
+  {
+    "path": "scripts/ae/audit_project.jsx",
+    "bytes": 2372,
+    "sha256": "d7a8670409e507ea40b5a76f9c54b0e3fcd938263f85c43a3826fbb6095c20f4"
+  },
+  {
+    "path": "scripts/ae/common.jsxinc",
+    "bytes": 2623,
+    "sha256": "37447daa518775bd4b3ac5a6638f0426918046b7f873d0408648adc6f1ac0813"
+  },
+  {
+    "path": "scripts/ae/create_type_scene.jsx",
+    "bytes": 2365,
+    "sha256": "57f3cf216e5bffd81d8c1ec8e2cfa197210ce7d469021be65b8348fedb1a0e58"
+  },
+  {
+    "path": "scripts/ae/json.jsxinc",
+    "bytes": 2823,
+    "sha256": "8fdd7272a0cff7f0ac6524ff46eb501d92859f1530950c510a33890ea17831c1"
+  },
+  {
+    "path": "scripts/ae/queue_export.jsx",
+    "bytes": 1787,
+    "sha256": "aa7a398a64d39666ef8615f646c3bcd385ab1b1e170cc9b89d0ae9c08e5cf858"
+  },
+  {
+    "path": "scripts/ae/relink_project.jsx",
+    "bytes": 1919,
+    "sha256": "05c308693f1b384c09460272e58f0b93b030456c19575275bd49b08bfc72e69e"
+  },
+  {
+    "path": "scripts/ae_tool.py",
+    "bytes": 3468,
+    "sha256": "1ac4d40f95b4cc0a86bfb9cb43e0e830d425e0e44efcac935062019bb84502d4"
+  },
+  {
+    "path": "scripts/archive_assets.py",
+    "bytes": 3735,
+    "sha256": "ea31fb684032aceaa48e2f33e2472a469d6c6af4d1a5985ac90cd61dfbda5bcf"
+  },
+  {
+    "path": "scripts/cleanup_dry_run.py",
+    "bytes": 2294,
+    "sha256": "3eb7cdfe38a9a7b4c85fb9751d7a511262153ae96d01b1d2b7149d8152612c9d"
+  },
+  {
+    "path": "scripts/frame_plan.py",
+    "bytes": 1357,
+    "sha256": "44da79a80ec64757e518599025ba7d0e8c449be05bf69bdf551a63526d95e7ca"
+  },
+  {
+    "path": "skills/ae-static-mad/references/ae-mechanics.md",
+    "bytes": 8315,
+    "sha256": "1e217af9a9c9a52652cfc4bdc111c11d44a6075f6233487e9092367c9b5d6556"
+  },
+  {
+    "path": "skills/ae-static-mad/references/aesthetic-practice.md",
+    "bytes": 8317,
+    "sha256": "6d16837443997d49ec13ce1a1a77516a50b682cb33f9102f2f9916a5106cef29"
+  },
+  {
+    "path": "skills/ae-static-mad/references/character-articulation.md",
+    "bytes": 5565,
+    "sha256": "111e7ceb3ac91d3a66dbd8c281fed04cee07f15156fb5f1a19fba40999125bb5"
+  },
+  {
+    "path": "skills/ae-static-mad/references/character-environment-compositing.md",
+    "bytes": 7405,
+    "sha256": "21211d4171f4a563fc01fa495c4ad3a87402ce9bab362876eb1cff7e78b219b1"
+  },
+  {
+    "path": "skills/ae-static-mad/references/direction-and-craft.md",
+    "bytes": 14103,
+    "sha256": "f62971023b9e3d2158ffaec4c969d0194bbe550eb44c9933980d0e1de846e33c"
+  },
+  {
+    "path": "skills/ae-static-mad/references/experiment-evidence.md",
+    "bytes": 815,
+    "sha256": "651e02884f5718cddca13ab6e1e625d671b6b705686c9df9993eb0a3cfb81884"
+  },
+  {
+    "path": "skills/ae-static-mad/references/learning-maintenance.md",
+    "bytes": 1450,
+    "sha256": "cd6d9a2816f716ca9d8c1cc4d0241fdea9710f3a371b0729b66c45ebf267326a"
+  },
+  {
+    "path": "skills/ae-static-mad/references/temporal-staging.md",
+    "bytes": 9225,
+    "sha256": "b0e424dd5de1e48afffced68069ff8c99f3ca931f9fcfca4fdf1d035ff4fe043"
+  },
+  {
+    "path": "skills/ae-static-mad/SKILL.md",
+    "bytes": 4368,
+    "sha256": "711099939d2b38eac9cac291c4b7b16cc91959a9f6bea1f12bdac6bf3951fb38"
+  },
+  {
+    "path": "skills/ae-static-mad/SNAPSHOT.md",
+    "bytes": 600,
+    "sha256": "fc618e77de20b0dfb0407dfbef23615079adfe863c8d24e68c5d755efd8f4d1e"
+  },
+  {
+    "path": "THIRD_PARTY.md",
+    "bytes": 3544,
+    "sha256": "9df390d826799880d289bfa8a23a462ea06722279dc16b3327edc325dceb7d36"
+  },
+  {
+    "path": "tools/release_audit.py",
+    "bytes": 3907,
+    "sha256": "66a0c800bf10696892064a445c1ce9b4a3dbec124d4d7975bbb06c9258eaa7b0"
+  },
+  {
+    "path": "tools/self_check.py",
+    "bytes": 4910,
+    "sha256": "a0b1819e320c5d7f739e84cd8de02b06ca3b1017f3f0a8db2216e324af5ce794"
+  },
+  {
+    "path": "VALIDATION.md",
+    "bytes": 1160,
+    "sha256": "5a33d693d1931726d0e40c7d94f6472fccd166978976988d8637ff10f0bba9ac"
+  }
+]

@@ -1,0 +1,35 @@
+// Original minimal JSON parser/serializer for older ExtendScript engines.
+// No eval and no third-party source code.
+var MADJSON = (function () {
+    function parse(text) {
+        var at=0, depth=0;
+        function fail(){throw Error('Invalid JSON at '+at);}
+        function space(){while(at<text.length && /\s/.test(text.charAt(at)))at++;}
+        function string(){
+            if(text.charAt(at++)!=='"')fail();var result='',c,hex,map={'"':'"','\\':'\\','/':'/','b':'\b','f':'\f','n':'\n','r':'\r','t':'\t'};
+            while(at<text.length){c=text.charAt(at++);if(c==='"')return result;
+                if(c==='\\'){c=text.charAt(at++);if(c==='u'){hex=text.substr(at,4);if(!/^[0-9a-fA-F]{4}$/.test(hex))fail();result+=String.fromCharCode(parseInt(hex,16));at+=4;}else{if(!map.hasOwnProperty(c))fail();result+=map[c];}}
+                else{if(c.charCodeAt(0)<32)fail();result+=c;}}
+            fail();
+        }
+        function value(){
+            space();if(++depth>100)fail();var c=text.charAt(at),v,i,k,m;
+            if(c==='"')v=string();
+            else if(c==='['){at++;v=[];space();if(text.charAt(at)===']')at++;else{while(true){v.push(value());space();c=text.charAt(at++);if(c===']')break;if(c!==',')fail();}}}
+            else if(c==='{'){at++;v={};space();if(text.charAt(at)==='}')at++;else{while(true){space();k=string();if(k==='__proto__'||k==='constructor'||k==='prototype')fail();space();if(text.charAt(at++)!==':')fail();v[k]=value();space();c=text.charAt(at++);if(c==='}')break;if(c!==',')fail();}}}
+            else if(text.substr(at,4)==='true'){at+=4;v=true;}
+            else if(text.substr(at,5)==='false'){at+=5;v=false;}
+            else if(text.substr(at,4)==='null'){at+=4;v=null;}
+            else{m=/^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/.exec(text.substr(at));if(!m)fail();at+=m[0].length;v=Number(m[0]);if(!isFinite(v))fail();}
+            depth--;return v;
+        }
+        text=text.replace(/^\uFEFF/,'');var result=value();space();if(at!==text.length)fail();return result;
+    }
+    function stringify(value){
+        function quoted(text){return '"'+text.replace(/["\\\u0000-\u001f]/g,function(c){var map={'"':'\\"','\\':'\\\\','\b':'\\b','\f':'\\f','\n':'\\n','\r':'\\r','\t':'\\t'};return map[c]||'\\u'+('0000'+c.charCodeAt(0).toString(16)).slice(-4);})+'"';}
+        function enc(v){var a=[],k,i;if(v===null||typeof v==='undefined')return 'null';if(typeof v==='string')return quoted(v);if(typeof v==='number')return isFinite(v)?String(v):'null';if(typeof v==='boolean')return v?'true':'false';if(v instanceof Array){for(i=0;i<v.length;i++)a.push(enc(v[i]));return '['+a.join(',')+']';}for(k in v)if(v.hasOwnProperty(k))a.push(quoted(k)+':'+enc(v[k]));return '{'+a.join(',')+'}';}
+        return enc(value);
+    }
+    return {parse:parse,stringify:stringify};
+})();
+

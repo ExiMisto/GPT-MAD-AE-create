@@ -1,0 +1,78 @@
+# 静止系 MAD 制作研究：判断、合成与连续演出
+
+这里记录一次长期人机协作制作中真正改变工作方式的方法，并提供可独立使用的 AE 素材审计、复制归档、排队导出和文字演出示例。主要面向想把漫画、文字、摄影与光组织成连续演出的制作者，以及希望维护长期制作经验的智能体。
+
+这是一份**制作研究代码与 skill**，不是优秀竞赛作品范本。我们做过失败的小样、错误的分体动画、失效的光影和把连续演出改成海报陈列的回退。参考作品的局部机制也没有全部完成忠实复刻。尤其不宣称已经完整复刻或超越《Sprechchor》。把“能渲染”与“做得好”分开，是这里最有用的经验之一。
+
+本包不附参考 MAD、漫画、小说摘抄、歌曲、人物图、商业插件、VTube 模型、完整原工程或私聊记录。第三方资源只列来源和状态；请自行取得素材与工具。原创公开代码、skill 与文档采用 MIT，见 [LICENSE.md](LICENSE.md)。
+
+## 从哪里开始
+
+- [判断与连续演出](docs/01-art-direction.md)：为什么精美缩略图仍然可能组成一段 PPT。
+- [文字系统](docs/02-typography.md)：阅读字、攻击字与构图字如何共用时间和空间。
+- [人物与环境融合](docs/03-compositing.md)：Alpha、灰阶、形体、局部受光和材质各解决什么。
+- [分体动画的失败边界](docs/04-articulation.md)：为什么纵向压缩眼睛不是眨眼，何时停止。
+- [工程时钟、预合成与导出](docs/05-ae-and-assets.md)：整数帧、时间伸缩、运动边界、无损复制归档。
+- [匿名失败记录与证据](docs/06-evidence-and-failures.md)：成功、失败、推测与未验证项目分别记录。
+- [skill 公开快照](skills/ae-static-mad/SKILL.md)：保留跨作品方法，移除了项目专属路由。
+
+## 最小工具链
+
+Python 3.10+，工具均使用标准库，不要求安装图片或机器学习依赖。AE 相关 JSX 需要合法安装的 Adobe After Effects；本地原项目使用 AE 2025，但本包改写后的通用 JSX **尚未在另一台 AE 上运行验证**。Python 部分可以完全独立测试。
+
+```powershell
+python tools/self_check.py
+python tools/release_audit.py --root .
+```
+
+`self_check.py` 用自己生成的临时文本文件测试归档、缺失文件、路径边界、字节级副本一致性、帧区间和 dry-run；不会打开 AE 或读取任何成片。
+
+先复制 `examples/local-config.example.json` 为 `local-config.json`，填写你自己的路径。该文件已被 `.gitignore` 排除；示例只用通用占位路径。命令中的输出报告也建议放在 `outputs/`，避免把本地路径提交给 Git。
+
+```powershell
+python scripts/ae_tool.py audit --config local-config.json --afterfx "YOUR_AFTERFX_EXECUTABLE"
+python scripts/archive_assets.py --report outputs/asset-audit.json --output outputs/archive
+python scripts/ae_tool.py relink --config local-config.json --afterfx "YOUR_AFTERFX_EXECUTABLE"
+python scripts/ae_tool.py queue --config local-config.json --afterfx "YOUR_AFTERFX_EXECUTABLE"
+python scripts/ae_tool.py render --config local-config.json --aerender "YOUR_AERENDER_EXECUTABLE"
+```
+
+执行顺序和配置字段见 [工程与资产说明](docs/05-ae-and-assets.md)。`archive_assets.py` 只复制素材，绝不删原件；重链接另存新工程。`render` 只执行排好的渲染队列，不在导出后解码或鉴赏视频。缺素材、序列帧、字体、第三方效果仍由明确报告处理，不能因保存成功而忽略。
+
+文字示例只需要自己填写的一句文字：
+
+```powershell
+python scripts/ae_tool.py type-demo --config local-config.json --afterfx "YOUR_AFTERFX_EXECUTABLE"
+python scripts/frame_plan.py --fps 30 --start 12 --end 42 --clip-start 30 --clip-end 70
+python scripts/cleanup_dry_run.py --root outputs --keep examples/keep-list.example.json --output outputs/cleanup-plan.json
+```
+
+最后一条只生成候选清单，**没有删除模式**。文字示例演示组级揭示、读清与实心块吞没，是机制练习，不是最终 MAD 风格模板。
+
+## 当前能力与限制
+
+| 项目 | 这里能提供什么 | 不能据此宣称什么 |
+|---|---|---|
+| 镜头、文字、光的判断 | 可迁移的方法与失败症状 | 自动获得竞赛审美或参考作者的节拍判断 |
+| 漫画合成 | 分组、Alpha、局部光向和边缘诊断 | 单张灰度图恢复可靠法线与真实投影 |
+| 分体 | 小幅发梢/衣摆与补底条件 | 原画不支持时仍能可靠眨眼、口型或大转头 |
+| AE 资产归档 | 从主合成可达图层采集依赖，复制、重链接 | 自动发现外部表达式、插件、所有字体与图片序列的隐式依赖 |
+| 本包 Python 工具 | 独立运行并进行行为测试 | JSX 已在所有 AE 语言/版本/模板组合验证 |
+| 参考复刻 | 机制分解与验证标准 | 本包含参考作品视频，或已经完整逐帧复刻 |
+
+动态参考是判断节奏的必要输入；静帧、顺序抽样和播放验证不能相互替代。没有公开原视频和原工程，就无法让陌生人独立重做所有艺术性判断；本文只保留经过匿名化的观察和操作限制，明确这个证据缺口。
+
+## 发布到 GitHub
+
+这是本地整理结果，还没有 `git init`、创建仓库、推送或公开上传。先核对 [发布准备检查](docs/07-release-readiness.md)，然后可以自己运行：
+
+```powershell
+git init -b main
+git add .
+git commit -m "Add still-image MAD production research and reusable tools"
+git remote add origin https://github.com/ExiMisto/GPT-MAD-AE-create.git
+git push -u origin main
+```
+
+请在本包目录执行。也可使用 `./git_commands.ps1`；脚本会先运行发布文件审计，再执行本地 init/add/commit，默认不推送，随后打印实际远程与 push 命令供你执行。它不会强推或创建远程仓库。
+

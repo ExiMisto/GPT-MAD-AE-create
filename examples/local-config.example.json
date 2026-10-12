@@ -1,0 +1,27 @@
+{
+  "source_project": "inputs/your-project.aep",
+  "master_comp": "YOUR MASTER COMP",
+  "audit_report": "outputs/asset-audit.json",
+  "archive_manifest": "outputs/archive/manifest.json",
+  "archived_project": "outputs/your-project-archived.aep",
+  "export_project": "outputs/your-project-archived.aep",
+  "render_project": "outputs/your-project-render.aep",
+  "output_video": "outputs/your-final.mp4",
+  "expected_width": 1920,
+  "expected_height": 1080,
+  "expected_fps": 30,
+  "quit_after_script": true,
+  "type_project": "outputs/type-mechanism.aep",
+  "type_demo": {
+    "text": "AFTER THE RAIN",
+    "font": "ArialMT",
+    "font_size": 48,
+    "tracking": 100,
+    "fps": 30,
+    "duration_frames": 100,
+    "reveal_start": 0,
+    "reveal_end": 8,
+    "erase_start": 74,
+    "erase_end": 82
+  }
+}

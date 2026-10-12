@@ -1,0 +1,9 @@
+{
+  "state": "passed",
+  "file_count": 39,
+  "total_bytes": 125496,
+  "issues": [],
+  "scope": "Static file/link/path/credential-pattern checks only; no legal or artwork validation",
+  "git_operations_executed": false,
+  "network_publication_performed": false
+}

@@ -1,0 +1,17 @@
+#include "json.jsxinc"
+var MAD = (function(){
+    var config=null,opened=false,suppressed=false;
+    function read(file){file.encoding='UTF-8';if(!file.open('r'))throw Error('Cannot read '+file.fsName);var text=file.read();file.close();return MADJSON.parse(text);}
+    function mkdir(folder){if(folder.exists)return;if(folder.parent&&!folder.parent.exists)mkdir(folder.parent);if(!folder.create())throw Error('Cannot create '+folder.fsName);}
+    function file(value){if(!value)throw Error('Missing path');return new File(/^(?:[A-Za-z]:[\\/]|\/|\\\\)/.test(value)?value:config.__base+'/'+value);}
+    function write(target,value){mkdir(target.parent);target.encoding='UTF-8';if(!target.open('w'))throw Error('Cannot write '+target.fsName);target.write(MADJSON.stringify(value));target.close();}
+    function load(){var path=$.getenv('MAD_CONFIG');if(!path)throw Error('Set MAD_CONFIG');var source=new File(path);config=read(source);config.__base=source.parent.fsName;config.__status=file('outputs/'+($.getenv('MAD_OPERATION')||'script')+'-status.json');write(config.__status,{state:'running'});return config;}
+    function begin(){if(app.project&&app.project.numItems&&app.project.dirty)throw Error('Current AE project has unsaved changes');app.beginSuppressDialogs();suppressed=true;if(app.project)app.project.close(CloseOptions.DO_NOT_SAVE_CHANGES);}
+    function open(value){begin();var source=file(value||config.source_project);if(!source.exists)throw Error('Source AEP missing');var project=app.open(source);opened=true;return project;}
+    function fresh(){begin();var project=app.newProject();opened=true;return project;}
+    function comp(project){for(var i=1;i<=project.numItems;i++){var c=project.item(i);if(c instanceof CompItem&&c.name===config.master_comp)return c;}throw Error('Master comp not found: '+config.master_comp);}
+    function uniqueOutput(name,source){var output=file(config[name]);if(source&&output.fsName.toLowerCase()===source.fsName.toLowerCase())throw Error('Output must differ from source');if(output.exists)throw Error('Output exists: '+output.fsName);mkdir(output.parent);return output;}
+    function end(error,details){if(config){write(config.__status,{state:error?'failed':'completed',error:error?String(error):null,details:details||{}});}if(opened&&app.project)app.project.close(CloseOptions.DO_NOT_SAVE_CHANGES);if(suppressed)app.endSuppressDialogs(false);if(config&&config.quit_after_script!==false&&opened)app.quit();if(error)$.writeln('ERROR '+error);}
+    return {load:load,file:file,read:read,write:write,open:open,fresh:fresh,comp:comp,uniqueOutput:uniqueOutput,end:end};
+})();
+

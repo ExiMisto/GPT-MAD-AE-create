@@ -2,7 +2,7 @@
 
 这里记录一次长期人机协作制作中真正改变工作方式的方法，并提供可独立使用的 AE 素材审计、复制归档、排队导出和文字演出示例。主要面向想把漫画、文字、摄影与光组织成连续演出的制作者，以及希望维护长期制作经验的智能体。
 
-这是一份**制作研究代码与 skill**，不是优秀竞赛作品范本。我们做过失败的小样、错误的分体动画、失效的光影和把连续演出改成海报陈列的回退。参考作品的局部机制也没有全部完成忠实复刻。尤其不宣称已经完整复刻或超越《Sprechchor》。把“能渲染”与“做得好”分开，是这里最有用的经验之一。
+这是一份**制作研究代码与 skill**，不是优秀竞赛作品范本。我们做过失败的小样、错误的分体动画、失效的光影和把连续演出改成海报陈列的回退。参考作品的局部机制也没有全部完成忠实复刻。把“能渲染”与“做得好”分开，是这里最有用的经验之一。
 
 本包不附参考 MAD、漫画、小说摘抄、歌曲、人物图、商业插件、VTube 模型、完整原工程或私聊记录。第三方资源只列来源和状态；请自行取得素材与工具。原创公开代码、skill 与文档采用 MIT，见 [LICENSE.md](LICENSE.md)。
 
@@ -61,18 +61,4 @@ python scripts/cleanup_dry_run.py --root outputs --keep examples/keep-list.examp
 | 参考复刻 | 机制分解与验证标准 | 本包含参考作品视频，或已经完整逐帧复刻 |
 
 动态参考是判断节奏的必要输入；静帧、顺序抽样和播放验证不能相互替代。没有公开原视频和原工程，就无法让陌生人独立重做所有艺术性判断；本文只保留经过匿名化的观察和操作限制，明确这个证据缺口。
-
-## 发布到 GitHub
-
-这是本地整理结果，还没有 `git init`、创建仓库、推送或公开上传。先核对 [发布准备检查](docs/07-release-readiness.md)，然后可以自己运行：
-
-```powershell
-git init -b main
-git add .
-git commit -m "Add still-image MAD production research and reusable tools"
-git remote add origin https://github.com/ExiMisto/GPT-MAD-AE-create.git
-git push -u origin main
-```
-
-请在本包目录执行。也可使用 `./git_commands.ps1`；脚本会先运行发布文件审计，再执行本地 init/add/commit，默认不推送，随后打印实际远程与 push 命令供你执行。它不会强推或创建远程仓库。
 
